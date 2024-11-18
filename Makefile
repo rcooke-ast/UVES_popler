@@ -10,7 +10,7 @@
 #LIBS = -L${CFITSIO_DIR}/lib -L${PGPLOT_DIR} -lm -lcpgplot -lpgplot -lX11 -lcfitsio
 
 # Mac OS X - assumes PGPLOT and CFITSIO were installed through MacPorts.
-SHELL = tcsh
+SHELL = zsh
 CC = gcc -Os
 FC = gfortran -Os
 #CFLAGS = -O2 -Wall -I./ -I/opt/local/include
