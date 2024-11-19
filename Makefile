@@ -9,14 +9,12 @@
 #CFLAGS = -L${CFITSIO_DIR}/include -L${PGPLOT_DIR} -O2 -Wall -I./
 #LIBS = -L${CFITSIO_DIR}/lib -L${PGPLOT_DIR} -lm -lcpgplot -lpgplot -lX11 -lcfitsio
 
-# Mac OS X - assumes PGPLOT and CFITSIO were installed through MacPorts.
-SHELL = zsh
+# Mac OS X - assumes PGPLOT and CFITSIO were installed through Homebrew.
+SHELL = tcsh
 CC = gcc -Os
 FC = gfortran -Os
-#CFLAGS = -O2 -Wall -I./ -I/opt/local/include
-CFLAGS = -O2 -Wall -I./ -I${HOME}/Software/pgplot52/pgplot -I/usr/local/Cellar/cfitsio/4.3.0/include
-#LIBS = -ldl -lm -lpng -lcurl -L/opt/local/lib -lX11 -lcpgplot -lpgplot /opt/local/lib/libcfitsio.a
-LIBS = -ldl -lm -lpng -lcurl -L${HOME}/Software/pgplot52/pgplot -lcpgplot -lpgplot -lX11 /usr/local/Cellar/cfitsio/4.3.0/lib/libcfitsio.a -L/opt/local/lib /opt/local/lib/libz.a
+CFLAGS = -O2 -Wall -I./ -I${PGPLOT_DIR}
+LIBS = -ldl -lm -L/usr/local/lib -lpng -lcurl -L${PGPLOT_DIR} -lcpgplot -lpgplot -lX11 -lcfitsio
 
 TARGET = ${HOME}/bin/UVES_popler
 DEVTARGET = ${HOME}/bin/UVES_popler.dev
@@ -94,49 +92,10 @@ mrqfit_erffn.o: fit.h gamm.h memory.h const.h error.h
 mrqfit_gauss.o: fit.h memory.h error.h
 mrqfit_multierffn.o: fit.h gamm.h memory.h const.h error.h
 mrqmin.o: fit.h memory.h error.h
-pg_button.o: pg_plot.h /Users/rcooke/Software/pgplot52/pgplot/cpgplot.h
-pg_button.o: /opt/local/include/X11/Xlib.h /opt/local/include/X11/X.h
-pg_button.o: /opt/local/include/X11/Xfuncproto.h
-pg_button.o: /opt/local/include/X11/Xosdefs.h /opt/local/include/X11/Xutil.h
-pg_button.o: /opt/local/include/X11/keysym.h
-pg_button.o: /opt/local/include/X11/keysymdef.h
-pg_button.o: /opt/local/include/X11/Xatom.h /opt/local/include/X11/Xos.h
-pg_button.o: /opt/local/include/X11/Xarch.h
-pg_button.o: /opt/local/include/X11/extensions/shape.h
-pg_button.o: /opt/local/include/X11/extensions/shapeconst.h charstr.h utils.h
-pg_get_wins.o: pg_plot.h /Users/rcooke/Software/pgplot52/pgplot/cpgplot.h
-pg_get_wins.o: /opt/local/include/X11/Xlib.h /opt/local/include/X11/X.h
-pg_get_wins.o: /opt/local/include/X11/Xfuncproto.h
-pg_get_wins.o: /opt/local/include/X11/Xosdefs.h
-pg_get_wins.o: /opt/local/include/X11/Xutil.h /opt/local/include/X11/keysym.h
-pg_get_wins.o: /opt/local/include/X11/keysymdef.h
-pg_get_wins.o: /opt/local/include/X11/Xatom.h /opt/local/include/X11/Xos.h
-pg_get_wins.o: /opt/local/include/X11/Xarch.h
-pg_get_wins.o: /opt/local/include/X11/extensions/shape.h
-pg_get_wins.o: /opt/local/include/X11/extensions/shapeconst.h charstr.h
-pg_get_wins.o: utils.h error.h
-pg_open.o: pg_plot.h /Users/rcooke/Software/pgplot52/pgplot/cpgplot.h
-pg_open.o: /opt/local/include/X11/Xlib.h /opt/local/include/X11/X.h
-pg_open.o: /opt/local/include/X11/Xfuncproto.h
-pg_open.o: /opt/local/include/X11/Xosdefs.h /opt/local/include/X11/Xutil.h
-pg_open.o: /opt/local/include/X11/keysym.h /opt/local/include/X11/keysymdef.h
-pg_open.o: /opt/local/include/X11/Xatom.h /opt/local/include/X11/Xos.h
-pg_open.o: /opt/local/include/X11/Xarch.h
-pg_open.o: /opt/local/include/X11/extensions/shape.h
-pg_open.o: /opt/local/include/X11/extensions/shapeconst.h charstr.h utils.h
-pg_open.o: error.h
-pg_win_rename.o: pg_plot.h /Users/rcooke/Software/pgplot52/pgplot/cpgplot.h
-pg_win_rename.o: /opt/local/include/X11/Xlib.h /opt/local/include/X11/X.h
-pg_win_rename.o: /opt/local/include/X11/Xfuncproto.h
-pg_win_rename.o: /opt/local/include/X11/Xosdefs.h
-pg_win_rename.o: /opt/local/include/X11/Xutil.h
-pg_win_rename.o: /opt/local/include/X11/keysym.h
-pg_win_rename.o: /opt/local/include/X11/keysymdef.h
-pg_win_rename.o: /opt/local/include/X11/Xatom.h /opt/local/include/X11/Xos.h
-pg_win_rename.o: /opt/local/include/X11/Xarch.h
-pg_win_rename.o: /opt/local/include/X11/extensions/shape.h
-pg_win_rename.o: /opt/local/include/X11/extensions/shapeconst.h charstr.h
-pg_win_rename.o: utils.h error.h
+pg_button.o: pg_plot.h charstr.h utils.h
+pg_get_wins.o: pg_plot.h charstr.h utils.h error.h
+pg_open.o: pg_plot.h charstr.h utils.h error.h
+pg_win_rename.o: pg_plot.h charstr.h utils.h error.h
 pythag.o: fit.h
 qsort_dbleint.o: sort.h
 qsort_dbletwointarray.o: sort.h
@@ -150,923 +109,119 @@ svdcmp.o: fit.h memory.h error.h
 svdfit.o: fit.h memory.h error.h
 svdfit_chebyshev.o: error.h
 svdvar.o: memory.h error.h
-UVES_atmask.o: UVES_popler.h pg_plot.h /Users/rcooke/Software/pgplot52/pgplot/cpgplot.h
-UVES_atmask.o: /opt/local/include/X11/Xlib.h /opt/local/include/X11/X.h
-UVES_atmask.o: /opt/local/include/X11/Xfuncproto.h
-UVES_atmask.o: /opt/local/include/X11/Xosdefs.h
-UVES_atmask.o: /opt/local/include/X11/Xutil.h /opt/local/include/X11/keysym.h
-UVES_atmask.o: /opt/local/include/X11/keysymdef.h
-UVES_atmask.o: /opt/local/include/X11/Xatom.h /opt/local/include/X11/Xos.h
-UVES_atmask.o: /opt/local/include/X11/Xarch.h
-UVES_atmask.o: /opt/local/include/X11/extensions/shape.h
-UVES_atmask.o: /opt/local/include/X11/extensions/shapeconst.h charstr.h
-UVES_atmask.o: utils.h memory.h error.h const.h
-UVES_boxcar.o: UVES_popler.h pg_plot.h /Users/rcooke/Software/pgplot52/pgplot/cpgplot.h
-UVES_boxcar.o: /opt/local/include/X11/Xlib.h /opt/local/include/X11/X.h
-UVES_boxcar.o: /opt/local/include/X11/Xfuncproto.h
-UVES_boxcar.o: /opt/local/include/X11/Xosdefs.h
-UVES_boxcar.o: /opt/local/include/X11/Xutil.h /opt/local/include/X11/keysym.h
-UVES_boxcar.o: /opt/local/include/X11/keysymdef.h
-UVES_boxcar.o: /opt/local/include/X11/Xatom.h /opt/local/include/X11/Xos.h
-UVES_boxcar.o: /opt/local/include/X11/Xarch.h
-UVES_boxcar.o: /opt/local/include/X11/extensions/shape.h
-UVES_boxcar.o: /opt/local/include/X11/extensions/shapeconst.h charstr.h
-UVES_boxcar.o: utils.h stats.h const.h memory.h error.h
-UVES_chunk_cont.o: UVES_popler.h pg_plot.h
-UVES_chunk_cont.o: /Users/rcooke/Software/pgplot52/pgplot/cpgplot.h
-UVES_chunk_cont.o: /opt/local/include/X11/Xlib.h /opt/local/include/X11/X.h
-UVES_chunk_cont.o: /opt/local/include/X11/Xfuncproto.h
-UVES_chunk_cont.o: /opt/local/include/X11/Xosdefs.h
-UVES_chunk_cont.o: /opt/local/include/X11/Xutil.h
-UVES_chunk_cont.o: /opt/local/include/X11/keysym.h
-UVES_chunk_cont.o: /opt/local/include/X11/keysymdef.h
-UVES_chunk_cont.o: /opt/local/include/X11/Xatom.h
-UVES_chunk_cont.o: /opt/local/include/X11/Xos.h
-UVES_chunk_cont.o: /opt/local/include/X11/Xarch.h
-UVES_chunk_cont.o: /opt/local/include/X11/extensions/shape.h
-UVES_chunk_cont.o: /opt/local/include/X11/extensions/shapeconst.h charstr.h
-UVES_chunk_cont.o: utils.h const.h memory.h error.h
-UVES_combine_cont.o: UVES_popler.h pg_plot.h
-UVES_combine_cont.o: /Users/rcooke/Software/pgplot52/pgplot/cpgplot.h
-UVES_combine_cont.o: /opt/local/include/X11/Xlib.h /opt/local/include/X11/X.h
-UVES_combine_cont.o: /opt/local/include/X11/Xfuncproto.h
-UVES_combine_cont.o: /opt/local/include/X11/Xosdefs.h
-UVES_combine_cont.o: /opt/local/include/X11/Xutil.h
-UVES_combine_cont.o: /opt/local/include/X11/keysym.h
-UVES_combine_cont.o: /opt/local/include/X11/keysymdef.h
-UVES_combine_cont.o: /opt/local/include/X11/Xatom.h
-UVES_combine_cont.o: /opt/local/include/X11/Xos.h
-UVES_combine_cont.o: /opt/local/include/X11/Xarch.h
-UVES_combine_cont.o: /opt/local/include/X11/extensions/shape.h
-UVES_combine_cont.o: /opt/local/include/X11/extensions/shapeconst.h charstr.h
-UVES_combine_cont.o: utils.h stats.h memory.h error.h
-UVES_combine_nocont.o: UVES_popler.h pg_plot.h
-UVES_combine_nocont.o: /Users/rcooke/Software/pgplot52/pgplot/cpgplot.h
-UVES_combine_nocont.o: /opt/local/include/X11/Xlib.h
-UVES_combine_nocont.o: /opt/local/include/X11/X.h
-UVES_combine_nocont.o: /opt/local/include/X11/Xfuncproto.h
-UVES_combine_nocont.o: /opt/local/include/X11/Xosdefs.h
-UVES_combine_nocont.o: /opt/local/include/X11/Xutil.h
-UVES_combine_nocont.o: /opt/local/include/X11/keysym.h
-UVES_combine_nocont.o: /opt/local/include/X11/keysymdef.h
-UVES_combine_nocont.o: /opt/local/include/X11/Xatom.h
-UVES_combine_nocont.o: /opt/local/include/X11/Xos.h
-UVES_combine_nocont.o: /opt/local/include/X11/Xarch.h
-UVES_combine_nocont.o: /opt/local/include/X11/extensions/shape.h
-UVES_combine_nocont.o: /opt/local/include/X11/extensions/shapeconst.h
-UVES_combine_nocont.o: charstr.h utils.h stats.h memory.h error.h
-UVES_combine_region.o: UVES_popler.h pg_plot.h
-UVES_combine_region.o: /Users/rcooke/Software/pgplot52/pgplot/cpgplot.h
-UVES_combine_region.o: /opt/local/include/X11/Xlib.h
-UVES_combine_region.o: /opt/local/include/X11/X.h
-UVES_combine_region.o: /opt/local/include/X11/Xfuncproto.h
-UVES_combine_region.o: /opt/local/include/X11/Xosdefs.h
-UVES_combine_region.o: /opt/local/include/X11/Xutil.h
-UVES_combine_region.o: /opt/local/include/X11/keysym.h
-UVES_combine_region.o: /opt/local/include/X11/keysymdef.h
-UVES_combine_region.o: /opt/local/include/X11/Xatom.h
-UVES_combine_region.o: /opt/local/include/X11/Xos.h
-UVES_combine_region.o: /opt/local/include/X11/Xarch.h
-UVES_combine_region.o: /opt/local/include/X11/extensions/shape.h
-UVES_combine_region.o: /opt/local/include/X11/extensions/shapeconst.h
-UVES_combine_region.o: charstr.h utils.h stats.h fit.h memory.h error.h
-UVES_combine_spec.o: UVES_popler.h pg_plot.h
-UVES_combine_spec.o: /Users/rcooke/Software/pgplot52/pgplot/cpgplot.h
-UVES_combine_spec.o: /opt/local/include/X11/Xlib.h /opt/local/include/X11/X.h
-UVES_combine_spec.o: /opt/local/include/X11/Xfuncproto.h
-UVES_combine_spec.o: /opt/local/include/X11/Xosdefs.h
-UVES_combine_spec.o: /opt/local/include/X11/Xutil.h
-UVES_combine_spec.o: /opt/local/include/X11/keysym.h
-UVES_combine_spec.o: /opt/local/include/X11/keysymdef.h
-UVES_combine_spec.o: /opt/local/include/X11/Xatom.h
-UVES_combine_spec.o: /opt/local/include/X11/Xos.h
-UVES_combine_spec.o: /opt/local/include/X11/Xarch.h
-UVES_combine_spec.o: /opt/local/include/X11/extensions/shape.h
-UVES_combine_spec.o: /opt/local/include/X11/extensions/shapeconst.h charstr.h
-UVES_combine_spec.o: utils.h stats.h memory.h error.h
-UVES_combsynthThAr.o: UVES_popler.h pg_plot.h
-UVES_combsynthThAr.o: /Users/rcooke/Software/pgplot52/pgplot/cpgplot.h
-UVES_combsynthThAr.o: /opt/local/include/X11/Xlib.h
-UVES_combsynthThAr.o: /opt/local/include/X11/X.h
-UVES_combsynthThAr.o: /opt/local/include/X11/Xfuncproto.h
-UVES_combsynthThAr.o: /opt/local/include/X11/Xosdefs.h
-UVES_combsynthThAr.o: /opt/local/include/X11/Xutil.h
-UVES_combsynthThAr.o: /opt/local/include/X11/keysym.h
-UVES_combsynthThAr.o: /opt/local/include/X11/keysymdef.h
-UVES_combsynthThAr.o: /opt/local/include/X11/Xatom.h
-UVES_combsynthThAr.o: /opt/local/include/X11/Xos.h
-UVES_combsynthThAr.o: /opt/local/include/X11/Xarch.h
-UVES_combsynthThAr.o: /opt/local/include/X11/extensions/shape.h
-UVES_combsynthThAr.o: /opt/local/include/X11/extensions/shapeconst.h
-UVES_combsynthThAr.o: charstr.h utils.h gamm.h const.h error.h
-UVES_confit.o: UVES_popler.h pg_plot.h /Users/rcooke/Software/pgplot52/pgplot/cpgplot.h
-UVES_confit.o: /opt/local/include/X11/Xlib.h /opt/local/include/X11/X.h
-UVES_confit.o: /opt/local/include/X11/Xfuncproto.h
-UVES_confit.o: /opt/local/include/X11/Xosdefs.h
-UVES_confit.o: /opt/local/include/X11/Xutil.h /opt/local/include/X11/keysym.h
-UVES_confit.o: /opt/local/include/X11/keysymdef.h
-UVES_confit.o: /opt/local/include/X11/Xatom.h /opt/local/include/X11/Xos.h
-UVES_confit.o: /opt/local/include/X11/Xarch.h
-UVES_confit.o: /opt/local/include/X11/extensions/shape.h
-UVES_confit.o: /opt/local/include/X11/extensions/shapeconst.h charstr.h
-UVES_confit.o: utils.h fit.h sort.h memory.h error.h
-UVES_cspec_cont.o: UVES_popler.h pg_plot.h
-UVES_cspec_cont.o: /Users/rcooke/Software/pgplot52/pgplot/cpgplot.h
-UVES_cspec_cont.o: /opt/local/include/X11/Xlib.h /opt/local/include/X11/X.h
-UVES_cspec_cont.o: /opt/local/include/X11/Xfuncproto.h
-UVES_cspec_cont.o: /opt/local/include/X11/Xosdefs.h
-UVES_cspec_cont.o: /opt/local/include/X11/Xutil.h
-UVES_cspec_cont.o: /opt/local/include/X11/keysym.h
-UVES_cspec_cont.o: /opt/local/include/X11/keysymdef.h
-UVES_cspec_cont.o: /opt/local/include/X11/Xatom.h
-UVES_cspec_cont.o: /opt/local/include/X11/Xos.h
-UVES_cspec_cont.o: /opt/local/include/X11/Xarch.h
-UVES_cspec_cont.o: /opt/local/include/X11/extensions/shape.h
-UVES_cspec_cont.o: /opt/local/include/X11/extensions/shapeconst.h charstr.h
-UVES_cspec_cont.o: utils.h stats.h const.h error.h
-UVES_cspec_stats.o: UVES_popler.h pg_plot.h
-UVES_cspec_stats.o: /Users/rcooke/Software/pgplot52/pgplot/cpgplot.h
-UVES_cspec_stats.o: /opt/local/include/X11/Xlib.h /opt/local/include/X11/X.h
-UVES_cspec_stats.o: /opt/local/include/X11/Xfuncproto.h
-UVES_cspec_stats.o: /opt/local/include/X11/Xosdefs.h
-UVES_cspec_stats.o: /opt/local/include/X11/Xutil.h
-UVES_cspec_stats.o: /opt/local/include/X11/keysym.h
-UVES_cspec_stats.o: /opt/local/include/X11/keysymdef.h
-UVES_cspec_stats.o: /opt/local/include/X11/Xatom.h
-UVES_cspec_stats.o: /opt/local/include/X11/Xos.h
-UVES_cspec_stats.o: /opt/local/include/X11/Xarch.h
-UVES_cspec_stats.o: /opt/local/include/X11/extensions/shape.h
-UVES_cspec_stats.o: /opt/local/include/X11/extensions/shapeconst.h charstr.h
-UVES_cspec_stats.o: utils.h memory.h stats.h const.h error.h
+UVES_atmask.o: UVES_popler.h pg_plot.h charstr.h utils.h memory.h error.h
+UVES_atmask.o: const.h
+UVES_boxcar.o: UVES_popler.h pg_plot.h charstr.h utils.h stats.h const.h
+UVES_boxcar.o: memory.h error.h
+UVES_chunk_cont.o: UVES_popler.h pg_plot.h charstr.h utils.h const.h memory.h
+UVES_chunk_cont.o: error.h
+UVES_combine_cont.o: UVES_popler.h pg_plot.h charstr.h utils.h stats.h
+UVES_combine_cont.o: memory.h error.h
+UVES_combine_nocont.o: UVES_popler.h pg_plot.h charstr.h utils.h stats.h
+UVES_combine_nocont.o: memory.h error.h
+UVES_combine_region.o: UVES_popler.h pg_plot.h charstr.h utils.h stats.h
+UVES_combine_region.o: fit.h memory.h error.h
+UVES_combine_spec.o: UVES_popler.h pg_plot.h charstr.h utils.h stats.h
+UVES_combine_spec.o: memory.h error.h
+UVES_combine_ESPRESSOtrace.o: UVES_popler.h pg_plot.h charstr.h utils.h
+UVES_combine_ESPRESSOtrace.o: stats.h memory.h error.h
+UVES_combsynthThAr.o: UVES_popler.h pg_plot.h charstr.h utils.h gamm.h
+UVES_combsynthThAr.o: const.h error.h
+UVES_confit.o: UVES_popler.h pg_plot.h charstr.h utils.h fit.h sort.h
+UVES_confit.o: memory.h error.h
+UVES_cspec_cont.o: UVES_popler.h pg_plot.h charstr.h utils.h stats.h const.h
+UVES_cspec_cont.o: error.h
+UVES_cspec_stats.o: UVES_popler.h pg_plot.h charstr.h utils.h memory.h
+UVES_cspec_stats.o: stats.h const.h error.h
 UVES_hex2dec.o: error.h
-UVES_hirx_blzfit.o: UVES_popler.h pg_plot.h
-UVES_hirx_blzfit.o: /Users/rcooke/Software/pgplot52/pgplot/cpgplot.h
-UVES_hirx_blzfit.o: /opt/local/include/X11/Xlib.h /opt/local/include/X11/X.h
-UVES_hirx_blzfit.o: /opt/local/include/X11/Xfuncproto.h
-UVES_hirx_blzfit.o: /opt/local/include/X11/Xosdefs.h
-UVES_hirx_blzfit.o: /opt/local/include/X11/Xutil.h
-UVES_hirx_blzfit.o: /opt/local/include/X11/keysym.h
-UVES_hirx_blzfit.o: /opt/local/include/X11/keysymdef.h
-UVES_hirx_blzfit.o: /opt/local/include/X11/Xatom.h
-UVES_hirx_blzfit.o: /opt/local/include/X11/Xos.h
-UVES_hirx_blzfit.o: /opt/local/include/X11/Xarch.h
-UVES_hirx_blzfit.o: /opt/local/include/X11/extensions/shape.h
-UVES_hirx_blzfit.o: /opt/local/include/X11/extensions/shapeconst.h charstr.h
-UVES_hirx_blzfit.o: utils.h fit.h stats.h memory.h error.h
-UVES_init_cspec.o: UVES_popler.h pg_plot.h
-UVES_init_cspec.o: /Users/rcooke/Software/pgplot52/pgplot/cpgplot.h
-UVES_init_cspec.o: /opt/local/include/X11/Xlib.h /opt/local/include/X11/X.h
-UVES_init_cspec.o: /opt/local/include/X11/Xfuncproto.h
-UVES_init_cspec.o: /opt/local/include/X11/Xosdefs.h
-UVES_init_cspec.o: /opt/local/include/X11/Xutil.h
-UVES_init_cspec.o: /opt/local/include/X11/keysym.h
-UVES_init_cspec.o: /opt/local/include/X11/keysymdef.h
-UVES_init_cspec.o: /opt/local/include/X11/Xatom.h
-UVES_init_cspec.o: /opt/local/include/X11/Xos.h
-UVES_init_cspec.o: /opt/local/include/X11/Xarch.h
-UVES_init_cspec.o: /opt/local/include/X11/extensions/shape.h
-UVES_init_cspec.o: /opt/local/include/X11/extensions/shapeconst.h charstr.h
-UVES_init_cspec.o: utils.h const.h memory.h error.h
-UVES_memspec.o: UVES_popler.h pg_plot.h /Users/rcooke/Software/pgplot52/pgplot/cpgplot.h
-UVES_memspec.o: /opt/local/include/X11/Xlib.h /opt/local/include/X11/X.h
-UVES_memspec.o: /opt/local/include/X11/Xfuncproto.h
-UVES_memspec.o: /opt/local/include/X11/Xosdefs.h
-UVES_memspec.o: /opt/local/include/X11/Xutil.h
-UVES_memspec.o: /opt/local/include/X11/keysym.h
-UVES_memspec.o: /opt/local/include/X11/keysymdef.h
-UVES_memspec.o: /opt/local/include/X11/Xatom.h /opt/local/include/X11/Xos.h
-UVES_memspec.o: /opt/local/include/X11/Xarch.h
-UVES_memspec.o: /opt/local/include/X11/extensions/shape.h
-UVES_memspec.o: /opt/local/include/X11/extensions/shapeconst.h charstr.h
-UVES_memspec.o: utils.h memory.h error.h
-UVES_merge_thar.o: UVES_popler.h pg_plot.h
-UVES_merge_thar.o: /Users/rcooke/Software/pgplot52/pgplot/cpgplot.h
-UVES_merge_thar.o: /opt/local/include/X11/Xlib.h /opt/local/include/X11/X.h
-UVES_merge_thar.o: /opt/local/include/X11/Xfuncproto.h
-UVES_merge_thar.o: /opt/local/include/X11/Xosdefs.h
-UVES_merge_thar.o: /opt/local/include/X11/Xutil.h
-UVES_merge_thar.o: /opt/local/include/X11/keysym.h
-UVES_merge_thar.o: /opt/local/include/X11/keysymdef.h
-UVES_merge_thar.o: /opt/local/include/X11/Xatom.h
-UVES_merge_thar.o: /opt/local/include/X11/Xos.h
-UVES_merge_thar.o: /opt/local/include/X11/Xarch.h
-UVES_merge_thar.o: /opt/local/include/X11/extensions/shape.h
-UVES_merge_thar.o: /opt/local/include/X11/extensions/shapeconst.h charstr.h
-UVES_merge_thar.o: utils.h const.h memory.h error.h
-UVES_model_resol.o: UVES_popler.h pg_plot.h
-UVES_model_resol.o: /Users/rcooke/Software/pgplot52/pgplot/cpgplot.h
-UVES_model_resol.o: /opt/local/include/X11/Xlib.h /opt/local/include/X11/X.h
-UVES_model_resol.o: /opt/local/include/X11/Xfuncproto.h
-UVES_model_resol.o: /opt/local/include/X11/Xosdefs.h
-UVES_model_resol.o: /opt/local/include/X11/Xutil.h
-UVES_model_resol.o: /opt/local/include/X11/keysym.h
-UVES_model_resol.o: /opt/local/include/X11/keysymdef.h
-UVES_model_resol.o: /opt/local/include/X11/Xatom.h
-UVES_model_resol.o: /opt/local/include/X11/Xos.h
-UVES_model_resol.o: /opt/local/include/X11/Xarch.h
-UVES_model_resol.o: /opt/local/include/X11/extensions/shape.h
-UVES_model_resol.o: /opt/local/include/X11/extensions/shapeconst.h charstr.h
-UVES_model_resol.o: utils.h fit.h stats.h memory.h const.h error.h
-UVES_order_cont.o: UVES_popler.h pg_plot.h
-UVES_order_cont.o: /Users/rcooke/Software/pgplot52/pgplot/cpgplot.h
-UVES_order_cont.o: /opt/local/include/X11/Xlib.h /opt/local/include/X11/X.h
-UVES_order_cont.o: /opt/local/include/X11/Xfuncproto.h
-UVES_order_cont.o: /opt/local/include/X11/Xosdefs.h
-UVES_order_cont.o: /opt/local/include/X11/Xutil.h
-UVES_order_cont.o: /opt/local/include/X11/keysym.h
-UVES_order_cont.o: /opt/local/include/X11/keysymdef.h
-UVES_order_cont.o: /opt/local/include/X11/Xatom.h
-UVES_order_cont.o: /opt/local/include/X11/Xos.h
-UVES_order_cont.o: /opt/local/include/X11/Xarch.h
-UVES_order_cont.o: /opt/local/include/X11/extensions/shape.h
-UVES_order_cont.o: /opt/local/include/X11/extensions/shapeconst.h charstr.h
-UVES_order_cont.o: utils.h error.h
-UVES_order_rejsigedge.o: UVES_popler.h pg_plot.h
-UVES_order_rejsigedge.o: /Users/rcooke/Software/pgplot52/pgplot/cpgplot.h
-UVES_order_rejsigedge.o: /opt/local/include/X11/Xlib.h
-UVES_order_rejsigedge.o: /opt/local/include/X11/X.h
-UVES_order_rejsigedge.o: /opt/local/include/X11/Xfuncproto.h
-UVES_order_rejsigedge.o: /opt/local/include/X11/Xosdefs.h
-UVES_order_rejsigedge.o: /opt/local/include/X11/Xutil.h
-UVES_order_rejsigedge.o: /opt/local/include/X11/keysym.h
-UVES_order_rejsigedge.o: /opt/local/include/X11/keysymdef.h
-UVES_order_rejsigedge.o: /opt/local/include/X11/Xatom.h
-UVES_order_rejsigedge.o: /opt/local/include/X11/Xos.h
-UVES_order_rejsigedge.o: /opt/local/include/X11/Xarch.h
-UVES_order_rejsigedge.o: /opt/local/include/X11/extensions/shape.h
-UVES_order_rejsigedge.o: /opt/local/include/X11/extensions/shapeconst.h
-UVES_order_rejsigedge.o: charstr.h utils.h memory.h stats.h error.h
-UVES_order_sigclip.o: UVES_popler.h pg_plot.h
-UVES_order_sigclip.o: /Users/rcooke/Software/pgplot52/pgplot/cpgplot.h
-UVES_order_sigclip.o: /opt/local/include/X11/Xlib.h
-UVES_order_sigclip.o: /opt/local/include/X11/X.h
-UVES_order_sigclip.o: /opt/local/include/X11/Xfuncproto.h
-UVES_order_sigclip.o: /opt/local/include/X11/Xosdefs.h
-UVES_order_sigclip.o: /opt/local/include/X11/Xutil.h
-UVES_order_sigclip.o: /opt/local/include/X11/keysym.h
-UVES_order_sigclip.o: /opt/local/include/X11/keysymdef.h
-UVES_order_sigclip.o: /opt/local/include/X11/Xatom.h
-UVES_order_sigclip.o: /opt/local/include/X11/Xos.h
-UVES_order_sigclip.o: /opt/local/include/X11/Xarch.h
-UVES_order_sigclip.o: /opt/local/include/X11/extensions/shape.h
-UVES_order_sigclip.o: /opt/local/include/X11/extensions/shapeconst.h
-UVES_order_sigclip.o: charstr.h utils.h stats.h memory.h error.h
-UVES_order_stats.o: UVES_popler.h pg_plot.h
-UVES_order_stats.o: /Users/rcooke/Software/pgplot52/pgplot/cpgplot.h
-UVES_order_stats.o: /opt/local/include/X11/Xlib.h /opt/local/include/X11/X.h
-UVES_order_stats.o: /opt/local/include/X11/Xfuncproto.h
-UVES_order_stats.o: /opt/local/include/X11/Xosdefs.h
-UVES_order_stats.o: /opt/local/include/X11/Xutil.h
-UVES_order_stats.o: /opt/local/include/X11/keysym.h
-UVES_order_stats.o: /opt/local/include/X11/keysymdef.h
-UVES_order_stats.o: /opt/local/include/X11/Xatom.h
-UVES_order_stats.o: /opt/local/include/X11/Xos.h
-UVES_order_stats.o: /opt/local/include/X11/Xarch.h
-UVES_order_stats.o: /opt/local/include/X11/extensions/shape.h
-UVES_order_stats.o: /opt/local/include/X11/extensions/shapeconst.h charstr.h
-UVES_order_stats.o: utils.h stats.h memory.h error.h
-UVES_params_init.o: UVES_popler.h pg_plot.h
-UVES_params_init.o: /Users/rcooke/Software/pgplot52/pgplot/cpgplot.h
-UVES_params_init.o: /opt/local/include/X11/Xlib.h /opt/local/include/X11/X.h
-UVES_params_init.o: /opt/local/include/X11/Xfuncproto.h
-UVES_params_init.o: /opt/local/include/X11/Xosdefs.h
-UVES_params_init.o: /opt/local/include/X11/Xutil.h
-UVES_params_init.o: /opt/local/include/X11/keysym.h
-UVES_params_init.o: /opt/local/include/X11/keysymdef.h
-UVES_params_init.o: /opt/local/include/X11/Xatom.h
-UVES_params_init.o: /opt/local/include/X11/Xos.h
-UVES_params_init.o: /opt/local/include/X11/Xarch.h
-UVES_params_init.o: /opt/local/include/X11/extensions/shape.h
-UVES_params_init.o: /opt/local/include/X11/extensions/shapeconst.h charstr.h
-UVES_params_init.o: utils.h
-UVES_params_set.o: UVES_popler.h pg_plot.h
-UVES_params_set.o: /Users/rcooke/Software/pgplot52/pgplot/cpgplot.h
-UVES_params_set.o: /opt/local/include/X11/Xlib.h /opt/local/include/X11/X.h
-UVES_params_set.o: /opt/local/include/X11/Xfuncproto.h
-UVES_params_set.o: /opt/local/include/X11/Xosdefs.h
-UVES_params_set.o: /opt/local/include/X11/Xutil.h
-UVES_params_set.o: /opt/local/include/X11/keysym.h
-UVES_params_set.o: /opt/local/include/X11/keysymdef.h
-UVES_params_set.o: /opt/local/include/X11/Xatom.h
-UVES_params_set.o: /opt/local/include/X11/Xos.h
-UVES_params_set.o: /opt/local/include/X11/Xarch.h
-UVES_params_set.o: /opt/local/include/X11/extensions/shape.h
-UVES_params_set.o: /opt/local/include/X11/extensions/shapeconst.h charstr.h
-UVES_params_set.o: utils.h
-UVES_past_actions.o: UVES_popler.h pg_plot.h
-UVES_past_actions.o: /Users/rcooke/Software/pgplot52/pgplot/cpgplot.h
-UVES_past_actions.o: /opt/local/include/X11/Xlib.h /opt/local/include/X11/X.h
-UVES_past_actions.o: /opt/local/include/X11/Xfuncproto.h
-UVES_past_actions.o: /opt/local/include/X11/Xosdefs.h
-UVES_past_actions.o: /opt/local/include/X11/Xutil.h
-UVES_past_actions.o: /opt/local/include/X11/keysym.h
-UVES_past_actions.o: /opt/local/include/X11/keysymdef.h
-UVES_past_actions.o: /opt/local/include/X11/Xatom.h
-UVES_past_actions.o: /opt/local/include/X11/Xos.h
-UVES_past_actions.o: /opt/local/include/X11/Xarch.h
-UVES_past_actions.o: /opt/local/include/X11/extensions/shape.h
-UVES_past_actions.o: /opt/local/include/X11/extensions/shapeconst.h charstr.h
-UVES_past_actions.o: utils.h fit.h memory.h error.h
-UVES_pgenv_init.o: UVES_popler.h pg_plot.h
-UVES_pgenv_init.o: /Users/rcooke/Software/pgplot52/pgplot/cpgplot.h
-UVES_pgenv_init.o: /opt/local/include/X11/Xlib.h /opt/local/include/X11/X.h
-UVES_pgenv_init.o: /opt/local/include/X11/Xfuncproto.h
-UVES_pgenv_init.o: /opt/local/include/X11/Xosdefs.h
-UVES_pgenv_init.o: /opt/local/include/X11/Xutil.h
-UVES_pgenv_init.o: /opt/local/include/X11/keysym.h
-UVES_pgenv_init.o: /opt/local/include/X11/keysymdef.h
-UVES_pgenv_init.o: /opt/local/include/X11/Xatom.h
-UVES_pgenv_init.o: /opt/local/include/X11/Xos.h
-UVES_pgenv_init.o: /opt/local/include/X11/Xarch.h
-UVES_pgenv_init.o: /opt/local/include/X11/extensions/shape.h
-UVES_pgenv_init.o: /opt/local/include/X11/extensions/shapeconst.h charstr.h
-UVES_pgenv_init.o: utils.h
-UVES_pixscal.o: UVES_popler.h pg_plot.h /Users/rcooke/Software/pgplot52/pgplot/cpgplot.h
-UVES_pixscal.o: /opt/local/include/X11/Xlib.h /opt/local/include/X11/X.h
-UVES_pixscal.o: /opt/local/include/X11/Xfuncproto.h
-UVES_pixscal.o: /opt/local/include/X11/Xosdefs.h
-UVES_pixscal.o: /opt/local/include/X11/Xutil.h
-UVES_pixscal.o: /opt/local/include/X11/keysym.h
-UVES_pixscal.o: /opt/local/include/X11/keysymdef.h
-UVES_pixscal.o: /opt/local/include/X11/Xatom.h /opt/local/include/X11/Xos.h
-UVES_pixscal.o: /opt/local/include/X11/Xarch.h
-UVES_pixscal.o: /opt/local/include/X11/extensions/shape.h
-UVES_pixscal.o: /opt/local/include/X11/extensions/shapeconst.h charstr.h
-UVES_pixscal.o: utils.h const.h
-UVES_plot_cspec.o: UVES_popler.h pg_plot.h
-UVES_plot_cspec.o: /Users/rcooke/Software/pgplot52/pgplot/cpgplot.h
-UVES_plot_cspec.o: /opt/local/include/X11/Xlib.h /opt/local/include/X11/X.h
-UVES_plot_cspec.o: /opt/local/include/X11/Xfuncproto.h
-UVES_plot_cspec.o: /opt/local/include/X11/Xosdefs.h
-UVES_plot_cspec.o: /opt/local/include/X11/Xutil.h
-UVES_plot_cspec.o: /opt/local/include/X11/keysym.h
-UVES_plot_cspec.o: /opt/local/include/X11/keysymdef.h
-UVES_plot_cspec.o: /opt/local/include/X11/Xatom.h
-UVES_plot_cspec.o: /opt/local/include/X11/Xos.h
-UVES_plot_cspec.o: /opt/local/include/X11/Xarch.h
-UVES_plot_cspec.o: /opt/local/include/X11/extensions/shape.h
-UVES_plot_cspec.o: /opt/local/include/X11/extensions/shapeconst.h charstr.h
-UVES_plot_cspec.o: utils.h fit.h stats.h sort.h gamm.h input.h memory.h
-UVES_plot_cspec.o: const.h error.h
-UVES_replace_envinstr.o: UVES_popler.h pg_plot.h
-UVES_replace_envinstr.o: /Users/rcooke/Software/pgplot52/pgplot/cpgplot.h
-UVES_replace_envinstr.o: /opt/local/include/X11/Xlib.h
-UVES_replace_envinstr.o: /opt/local/include/X11/X.h
-UVES_replace_envinstr.o: /opt/local/include/X11/Xfuncproto.h
-UVES_replace_envinstr.o: /opt/local/include/X11/Xosdefs.h
-UVES_replace_envinstr.o: /opt/local/include/X11/Xutil.h
-UVES_replace_envinstr.o: /opt/local/include/X11/keysym.h
-UVES_replace_envinstr.o: /opt/local/include/X11/keysymdef.h
-UVES_replace_envinstr.o: /opt/local/include/X11/Xatom.h
-UVES_replace_envinstr.o: /opt/local/include/X11/Xos.h
-UVES_replace_envinstr.o: /opt/local/include/X11/Xarch.h
-UVES_replace_envinstr.o: /opt/local/include/X11/extensions/shape.h
-UVES_replace_envinstr.o: /opt/local/include/X11/extensions/shapeconst.h
-UVES_replace_envinstr.o: charstr.h utils.h memory.h error.h
-UVES_plot_replay.o: UVES_popler.h pg_plot.h
-UVES_plot_replay.o: /Users/rcooke/Software/pgplot52/pgplot/cpgplot.h
-UVES_plot_replay.o: /opt/local/include/X11/Xlib.h /opt/local/include/X11/X.h
-UVES_plot_replay.o: /opt/local/include/X11/Xfuncproto.h
-UVES_plot_replay.o: /opt/local/include/X11/Xosdefs.h
-UVES_plot_replay.o: /opt/local/include/X11/Xutil.h
-UVES_plot_replay.o: /opt/local/include/X11/keysym.h
-UVES_plot_replay.o: /opt/local/include/X11/keysymdef.h
-UVES_plot_replay.o: /opt/local/include/X11/Xatom.h
-UVES_plot_replay.o: /opt/local/include/X11/Xos.h
-UVES_plot_replay.o: /opt/local/include/X11/Xarch.h
-UVES_plot_replay.o: /opt/local/include/X11/extensions/shape.h
-UVES_plot_replay.o: /opt/local/include/X11/extensions/shapeconst.h charstr.h
-UVES_plot_replay.o: utils.h input.h error.h
-UVES_popler.o: UVES_popler.h pg_plot.h /Users/rcooke/Software/pgplot52/pgplot/cpgplot.h
-UVES_popler.o: /opt/local/include/X11/Xlib.h /opt/local/include/X11/X.h
-UVES_popler.o: /opt/local/include/X11/Xfuncproto.h
-UVES_popler.o: /opt/local/include/X11/Xosdefs.h
-UVES_popler.o: /opt/local/include/X11/Xutil.h /opt/local/include/X11/keysym.h
-UVES_popler.o: /opt/local/include/X11/keysymdef.h
-UVES_popler.o: /opt/local/include/X11/Xatom.h /opt/local/include/X11/Xos.h
-UVES_popler.o: /opt/local/include/X11/Xarch.h
-UVES_popler.o: /opt/local/include/X11/extensions/shape.h
-UVES_popler.o: /opt/local/include/X11/extensions/shapeconst.h charstr.h
-UVES_popler.o: utils.h stats.h input.h error.h
-UVES_r1Dspec.o: /opt/local/include/fitsio.h /opt/local/include/longnam.h
-UVES_r1Dspec.o: UVES_popler.h pg_plot.h /Users/rcooke/Software/pgplot52/pgplot/cpgplot.h
-UVES_r1Dspec.o: /opt/local/include/X11/Xlib.h /opt/local/include/X11/X.h
-UVES_r1Dspec.o: /opt/local/include/X11/Xfuncproto.h
-UVES_r1Dspec.o: /opt/local/include/X11/Xosdefs.h
-UVES_r1Dspec.o: /opt/local/include/X11/Xutil.h
-UVES_r1Dspec.o: /opt/local/include/X11/keysym.h
-UVES_r1Dspec.o: /opt/local/include/X11/keysymdef.h
-UVES_r1Dspec.o: /opt/local/include/X11/Xatom.h /opt/local/include/X11/Xos.h
-UVES_r1Dspec.o: /opt/local/include/X11/Xarch.h
-UVES_r1Dspec.o: /opt/local/include/X11/extensions/shape.h
-UVES_r1Dspec.o: /opt/local/include/X11/extensions/shapeconst.h charstr.h
-UVES_r1Dspec.o: utils.h const.h file.h memory.h error.h
-UVES_r2Dspec.o: /opt/local/include/fitsio.h /opt/local/include/longnam.h
-UVES_r2Dspec.o: UVES_popler.h pg_plot.h /Users/rcooke/Software/pgplot52/pgplot/cpgplot.h
-UVES_r2Dspec.o: /opt/local/include/X11/Xlib.h /opt/local/include/X11/X.h
-UVES_r2Dspec.o: /opt/local/include/X11/Xfuncproto.h
-UVES_r2Dspec.o: /opt/local/include/X11/Xosdefs.h
-UVES_r2Dspec.o: /opt/local/include/X11/Xutil.h
-UVES_r2Dspec.o: /opt/local/include/X11/keysym.h
-UVES_r2Dspec.o: /opt/local/include/X11/keysymdef.h
-UVES_r2Dspec.o: /opt/local/include/X11/Xatom.h /opt/local/include/X11/Xos.h
-UVES_r2Dspec.o: /opt/local/include/X11/Xarch.h
-UVES_r2Dspec.o: /opt/local/include/X11/extensions/shape.h
-UVES_r2Dspec.o: /opt/local/include/X11/extensions/shapeconst.h charstr.h
-UVES_r2Dspec.o: utils.h stats.h memory.h error.h const.h
-UVES_r2Dspec_ESOmer.o: /opt/local/include/fitsio.h
-UVES_r2Dspec_ESOmer.o: /opt/local/include/longnam.h UVES_popler.h pg_plot.h
-UVES_r2Dspec_ESOmer.o: /Users/rcooke/Software/pgplot52/pgplot/cpgplot.h
-UVES_r2Dspec_ESOmer.o: /opt/local/include/X11/Xlib.h
-UVES_r2Dspec_ESOmer.o: /opt/local/include/X11/X.h
-UVES_r2Dspec_ESOmer.o: /opt/local/include/X11/Xfuncproto.h
-UVES_r2Dspec_ESOmer.o: /opt/local/include/X11/Xosdefs.h
-UVES_r2Dspec_ESOmer.o: /opt/local/include/X11/Xutil.h
-UVES_r2Dspec_ESOmer.o: /opt/local/include/X11/keysym.h
-UVES_r2Dspec_ESOmer.o: /opt/local/include/X11/keysymdef.h
-UVES_r2Dspec_ESOmer.o: /opt/local/include/X11/Xatom.h
-UVES_r2Dspec_ESOmer.o: /opt/local/include/X11/Xos.h
-UVES_r2Dspec_ESOmer.o: /opt/local/include/X11/Xarch.h
-UVES_r2Dspec_ESOmer.o: /opt/local/include/X11/extensions/shape.h
-UVES_r2Dspec_ESOmer.o: /opt/local/include/X11/extensions/shapeconst.h
-UVES_r2Dspec_ESOmer.o: charstr.h utils.h astron.h const.h memory.h error.h
-UVES_r2Dspec_espresso.o: /opt/local/include/fitsio.h
-UVES_r2Dspec_espresso.o: /opt/local/include/longnam.h UVES_popler.h pg_plot.h
-UVES_r2Dspec_espresso.o: /Users/rcooke/Software/pgplot52/pgplot/cpgplot.h
-UVES_r2Dspec_espresso.o: /opt/local/include/X11/Xlib.h
-UVES_r2Dspec_espresso.o: /opt/local/include/X11/X.h
-UVES_r2Dspec_espresso.o: /opt/local/include/X11/Xfuncproto.h
-UVES_r2Dspec_espresso.o: /opt/local/include/X11/Xosdefs.h
-UVES_r2Dspec_espresso.o: /opt/local/include/X11/Xutil.h
-UVES_r2Dspec_espresso.o: /opt/local/include/X11/keysym.h
-UVES_r2Dspec_espresso.o: /opt/local/include/X11/keysymdef.h
-UVES_r2Dspec_espresso.o: /opt/local/include/X11/Xatom.h
-UVES_r2Dspec_espresso.o: /opt/local/include/X11/Xos.h
-UVES_r2Dspec_espresso.o: /opt/local/include/X11/Xarch.h
-UVES_r2Dspec_espresso.o: /opt/local/include/X11/extensions/shape.h
-UVES_r2Dspec_espresso.o: /opt/local/include/X11/extensions/shapeconst.h
-UVES_r2Dspec_espresso.o: charstr.h utils.h stats.h memory.h error.h const.h
-UVES_r2Dspec_harps.o: /opt/local/include/fitsio.h
-UVES_r2Dspec_harps.o: /opt/local/include/longnam.h UVES_popler.h pg_plot.h
-UVES_r2Dspec_harps.o: /Users/rcooke/Software/pgplot52/pgplot/cpgplot.h
-UVES_r2Dspec_harps.o: /opt/local/include/X11/Xlib.h
-UVES_r2Dspec_harps.o: /opt/local/include/X11/X.h
-UVES_r2Dspec_harps.o: /opt/local/include/X11/Xfuncproto.h
-UVES_r2Dspec_harps.o: /opt/local/include/X11/Xosdefs.h
-UVES_r2Dspec_harps.o: /opt/local/include/X11/Xutil.h
-UVES_r2Dspec_harps.o: /opt/local/include/X11/keysym.h
-UVES_r2Dspec_harps.o: /opt/local/include/X11/keysymdef.h
-UVES_r2Dspec_harps.o: /opt/local/include/X11/Xatom.h
-UVES_r2Dspec_harps.o: /opt/local/include/X11/Xos.h
-UVES_r2Dspec_harps.o: /opt/local/include/X11/Xarch.h
-UVES_r2Dspec_harps.o: /opt/local/include/X11/extensions/shape.h
-UVES_r2Dspec_harps.o: /opt/local/include/X11/extensions/shapeconst.h
-UVES_r2Dspec_harps.o: charstr.h utils.h stats.h memory.h error.h const.h
-UVES_r2Dspec_hirx.o: /opt/local/include/fitsio.h /opt/local/include/longnam.h
-UVES_r2Dspec_hirx.o: UVES_popler.h pg_plot.h
-UVES_r2Dspec_hirx.o: /Users/rcooke/Software/pgplot52/pgplot/cpgplot.h
-UVES_r2Dspec_hirx.o: /opt/local/include/X11/Xlib.h /opt/local/include/X11/X.h
-UVES_r2Dspec_hirx.o: /opt/local/include/X11/Xfuncproto.h
-UVES_r2Dspec_hirx.o: /opt/local/include/X11/Xosdefs.h
-UVES_r2Dspec_hirx.o: /opt/local/include/X11/Xutil.h
-UVES_r2Dspec_hirx.o: /opt/local/include/X11/keysym.h
-UVES_r2Dspec_hirx.o: /opt/local/include/X11/keysymdef.h
-UVES_r2Dspec_hirx.o: /opt/local/include/X11/Xatom.h
-UVES_r2Dspec_hirx.o: /opt/local/include/X11/Xos.h
-UVES_r2Dspec_hirx.o: /opt/local/include/X11/Xarch.h
-UVES_r2Dspec_hirx.o: /opt/local/include/X11/extensions/shape.h
-UVES_r2Dspec_hirx.o: /opt/local/include/X11/extensions/shapeconst.h charstr.h
-UVES_r2Dspec_hirx.o: utils.h fit.h memory.h error.h const.h
-UVES_r2Dspec_iraf.o: /opt/local/include/fitsio.h /opt/local/include/longnam.h
-UVES_r2Dspec_iraf.o: UVES_popler.h pg_plot.h
-UVES_r2Dspec_iraf.o: /Users/rcooke/Software/pgplot52/pgplot/cpgplot.h
-UVES_r2Dspec_iraf.o: /opt/local/include/X11/Xlib.h /opt/local/include/X11/X.h
-UVES_r2Dspec_iraf.o: /opt/local/include/X11/Xfuncproto.h
-UVES_r2Dspec_iraf.o: /opt/local/include/X11/Xosdefs.h
-UVES_r2Dspec_iraf.o: /opt/local/include/X11/Xutil.h
-UVES_r2Dspec_iraf.o: /opt/local/include/X11/keysym.h
-UVES_r2Dspec_iraf.o: /opt/local/include/X11/keysymdef.h
-UVES_r2Dspec_iraf.o: /opt/local/include/X11/Xatom.h
-UVES_r2Dspec_iraf.o: /opt/local/include/X11/Xos.h
-UVES_r2Dspec_iraf.o: /opt/local/include/X11/Xarch.h
-UVES_r2Dspec_iraf.o: /opt/local/include/X11/extensions/shape.h
-UVES_r2Dspec_iraf.o: /opt/local/include/X11/extensions/shapeconst.h charstr.h
-UVES_r2Dspec_iraf.o: utils.h astron.h const.h memory.h error.h
-UVES_r2Dspec_iresi.o: /opt/local/include/fitsio.h
-UVES_r2Dspec_iresi.o: /opt/local/include/longnam.h UVES_popler.h pg_plot.h
-UVES_r2Dspec_iresi.o: /Users/rcooke/Software/pgplot52/pgplot/cpgplot.h
-UVES_r2Dspec_iresi.o: /opt/local/include/X11/Xlib.h
-UVES_r2Dspec_iresi.o: /opt/local/include/X11/X.h
-UVES_r2Dspec_iresi.o: /opt/local/include/X11/Xfuncproto.h
-UVES_r2Dspec_iresi.o: /opt/local/include/X11/Xosdefs.h
-UVES_r2Dspec_iresi.o: /opt/local/include/X11/Xutil.h
-UVES_r2Dspec_iresi.o: /opt/local/include/X11/keysym.h
-UVES_r2Dspec_iresi.o: /opt/local/include/X11/keysymdef.h
-UVES_r2Dspec_iresi.o: /opt/local/include/X11/Xatom.h
-UVES_r2Dspec_iresi.o: /opt/local/include/X11/Xos.h
-UVES_r2Dspec_iresi.o: /opt/local/include/X11/Xarch.h
-UVES_r2Dspec_iresi.o: /opt/local/include/X11/extensions/shape.h
-UVES_r2Dspec_iresi.o: /opt/local/include/X11/extensions/shapeconst.h
-UVES_r2Dspec_iresi.o: charstr.h utils.h astron.h const.h memory.h error.h
-UVES_r2Dspec_irls.o: /opt/local/include/fitsio.h /opt/local/include/longnam.h
-UVES_r2Dspec_irls.o: UVES_popler.h pg_plot.h
-UVES_r2Dspec_irls.o: /Users/rcooke/Software/pgplot52/pgplot/cpgplot.h
-UVES_r2Dspec_irls.o: /opt/local/include/X11/Xlib.h /opt/local/include/X11/X.h
-UVES_r2Dspec_irls.o: /opt/local/include/X11/Xfuncproto.h
-UVES_r2Dspec_irls.o: /opt/local/include/X11/Xosdefs.h
-UVES_r2Dspec_irls.o: /opt/local/include/X11/Xutil.h
-UVES_r2Dspec_irls.o: /opt/local/include/X11/keysym.h
-UVES_r2Dspec_irls.o: /opt/local/include/X11/keysymdef.h
-UVES_r2Dspec_irls.o: /opt/local/include/X11/Xatom.h
-UVES_r2Dspec_irls.o: /opt/local/include/X11/Xos.h
-UVES_r2Dspec_irls.o: /opt/local/include/X11/Xarch.h
-UVES_r2Dspec_irls.o: /opt/local/include/X11/extensions/shape.h
-UVES_r2Dspec_irls.o: /opt/local/include/X11/extensions/shapeconst.h charstr.h
-UVES_r2Dspec_irls.o: utils.h astron.h const.h memory.h error.h
-UVES_r2Dspec_KODIAQ.o: /opt/local/include/fitsio.h
-UVES_r2Dspec_KODIAQ.o: /opt/local/include/longnam.h UVES_popler.h pg_plot.h
-UVES_r2Dspec_KODIAQ.o: /Users/rcooke/Software/pgplot52/pgplot/cpgplot.h
-UVES_r2Dspec_KODIAQ.o: /opt/local/include/X11/Xlib.h
-UVES_r2Dspec_KODIAQ.o: /opt/local/include/X11/X.h
-UVES_r2Dspec_KODIAQ.o: /opt/local/include/X11/Xfuncproto.h
-UVES_r2Dspec_KODIAQ.o: /opt/local/include/X11/Xosdefs.h
-UVES_r2Dspec_KODIAQ.o: /opt/local/include/X11/Xutil.h
-UVES_r2Dspec_KODIAQ.o: /opt/local/include/X11/keysym.h
-UVES_r2Dspec_KODIAQ.o: /opt/local/include/X11/keysymdef.h
-UVES_r2Dspec_KODIAQ.o: /opt/local/include/X11/Xatom.h
-UVES_r2Dspec_KODIAQ.o: /opt/local/include/X11/Xos.h
-UVES_r2Dspec_KODIAQ.o: /opt/local/include/X11/Xarch.h
-UVES_r2Dspec_KODIAQ.o: /opt/local/include/X11/extensions/shape.h
-UVES_r2Dspec_KODIAQ.o: /opt/local/include/X11/extensions/shapeconst.h
-UVES_r2Dspec_KODIAQ.o: charstr.h utils.h memory.h error.h
-UVES_r2Dspec_mage.o: /opt/local/include/fitsio.h /opt/local/include/longnam.h
-UVES_r2Dspec_mage.o: UVES_popler.h pg_plot.h
-UVES_r2Dspec_mage.o: /Users/rcooke/Software/pgplot52/pgplot/cpgplot.h
-UVES_r2Dspec_mage.o: /opt/local/include/X11/Xlib.h /opt/local/include/X11/X.h
-UVES_r2Dspec_mage.o: /opt/local/include/X11/Xfuncproto.h
-UVES_r2Dspec_mage.o: /opt/local/include/X11/Xosdefs.h
-UVES_r2Dspec_mage.o: /opt/local/include/X11/Xutil.h
-UVES_r2Dspec_mage.o: /opt/local/include/X11/keysym.h
-UVES_r2Dspec_mage.o: /opt/local/include/X11/keysymdef.h
-UVES_r2Dspec_mage.o: /opt/local/include/X11/Xatom.h
-UVES_r2Dspec_mage.o: /opt/local/include/X11/Xos.h
-UVES_r2Dspec_mage.o: /opt/local/include/X11/Xarch.h
-UVES_r2Dspec_mage.o: /opt/local/include/X11/extensions/shape.h
-UVES_r2Dspec_mage.o: /opt/local/include/X11/extensions/shapeconst.h charstr.h
-UVES_r2Dspec_mage.o: utils.h astron.h const.h memory.h error.h
-UVES_r2Dspec_makee.o: /opt/local/include/fitsio.h
-UVES_r2Dspec_makee.o: /opt/local/include/longnam.h UVES_popler.h pg_plot.h
-UVES_r2Dspec_makee.o: /Users/rcooke/Software/pgplot52/pgplot/cpgplot.h
-UVES_r2Dspec_makee.o: /opt/local/include/X11/Xlib.h
-UVES_r2Dspec_makee.o: /opt/local/include/X11/X.h
-UVES_r2Dspec_makee.o: /opt/local/include/X11/Xfuncproto.h
-UVES_r2Dspec_makee.o: /opt/local/include/X11/Xosdefs.h
-UVES_r2Dspec_makee.o: /opt/local/include/X11/Xutil.h
-UVES_r2Dspec_makee.o: /opt/local/include/X11/keysym.h
-UVES_r2Dspec_makee.o: /opt/local/include/X11/keysymdef.h
-UVES_r2Dspec_makee.o: /opt/local/include/X11/Xatom.h
-UVES_r2Dspec_makee.o: /opt/local/include/X11/Xos.h
-UVES_r2Dspec_makee.o: /opt/local/include/X11/Xarch.h
-UVES_r2Dspec_makee.o: /opt/local/include/X11/extensions/shape.h
-UVES_r2Dspec_makee.o: /opt/local/include/X11/extensions/shapeconst.h
-UVES_r2Dspec_makee.o: charstr.h utils.h memory.h const.h error.h
-UVES_r2Dspec_pypeit.o: /opt/local/include/fitsio.h /opt/local/include/longnam.h
-UVES_r2Dspec_pypeit.o: UVES_popler.h pg_plot.h
-UVES_r2Dspec_pypeit.o: /Users/rcooke/Software/pgplot52/pgplot/cpgplot.h
-UVES_r2Dspec_pypeit.o: /opt/local/include/X11/Xlib.h /opt/local/include/X11/X.h
-UVES_r2Dspec_pypeit.o: /opt/local/include/X11/Xfuncproto.h
-UVES_r2Dspec_pypeit.o: /opt/local/include/X11/Xosdefs.h
-UVES_r2Dspec_pypeit.o: /opt/local/include/X11/Xutil.h
-UVES_r2Dspec_pypeit.o: /opt/local/include/X11/keysym.h
-UVES_r2Dspec_pypeit.o: /opt/local/include/X11/keysymdef.h
-UVES_r2Dspec_pypeit.o: /opt/local/include/X11/Xatom.h
-UVES_r2Dspec_pypeit.o: /opt/local/include/X11/Xos.h
-UVES_r2Dspec_pypeit.o: /opt/local/include/X11/Xarch.h
-UVES_r2Dspec_pypeit.o: /opt/local/include/X11/extensions/shape.h
-UVES_r2Dspec_pypeit.o: /opt/local/include/X11/extensions/shapeconst.h charstr.h
-UVES_r2Dspec_pypeit.o: utils.h fit.h memory.h error.h const.h
-UVES_ratmask.o: UVES_popler.h pg_plot.h /Users/rcooke/Software/pgplot52/pgplot/cpgplot.h
-UVES_ratmask.o: /opt/local/include/X11/Xlib.h /opt/local/include/X11/X.h
-UVES_ratmask.o: /opt/local/include/X11/Xfuncproto.h
-UVES_ratmask.o: /opt/local/include/X11/Xosdefs.h
-UVES_ratmask.o: /opt/local/include/X11/Xutil.h
-UVES_ratmask.o: /opt/local/include/X11/keysym.h
-UVES_ratmask.o: /opt/local/include/X11/keysymdef.h
-UVES_ratmask.o: /opt/local/include/X11/Xatom.h /opt/local/include/X11/Xos.h
-UVES_ratmask.o: /opt/local/include/X11/Xarch.h
-UVES_ratmask.o: /opt/local/include/X11/extensions/shape.h
-UVES_ratmask.o: /opt/local/include/X11/extensions/shapeconst.h charstr.h
-UVES_ratmask.o: utils.h memory.h file.h error.h
-UVES_redispers.o: UVES_popler.h pg_plot.h
-UVES_redispers.o: /Users/rcooke/Software/pgplot52/pgplot/cpgplot.h
-UVES_redispers.o: /opt/local/include/X11/Xlib.h /opt/local/include/X11/X.h
-UVES_redispers.o: /opt/local/include/X11/Xfuncproto.h
-UVES_redispers.o: /opt/local/include/X11/Xosdefs.h
-UVES_redispers.o: /opt/local/include/X11/Xutil.h
-UVES_redispers.o: /opt/local/include/X11/keysym.h
-UVES_redispers.o: /opt/local/include/X11/keysymdef.h
-UVES_redispers.o: /opt/local/include/X11/Xatom.h /opt/local/include/X11/Xos.h
-UVES_redispers.o: /opt/local/include/X11/Xarch.h
-UVES_redispers.o: /opt/local/include/X11/extensions/shape.h
-UVES_redispers.o: /opt/local/include/X11/extensions/shapeconst.h charstr.h
-UVES_redispers.o: utils.h memory.h error.h
-UVES_replay_control.o: UVES_popler.h pg_plot.h
-UVES_replay_control.o: /Users/rcooke/Software/pgplot52/pgplot/cpgplot.h
-UVES_replay_control.o: /opt/local/include/X11/Xlib.h
-UVES_replay_control.o: /opt/local/include/X11/X.h
-UVES_replay_control.o: /opt/local/include/X11/Xfuncproto.h
-UVES_replay_control.o: /opt/local/include/X11/Xosdefs.h
-UVES_replay_control.o: /opt/local/include/X11/Xutil.h
-UVES_replay_control.o: /opt/local/include/X11/keysym.h
-UVES_replay_control.o: /opt/local/include/X11/keysymdef.h
-UVES_replay_control.o: /opt/local/include/X11/Xatom.h
-UVES_replay_control.o: /opt/local/include/X11/Xos.h
-UVES_replay_control.o: /opt/local/include/X11/Xarch.h
-UVES_replay_control.o: /opt/local/include/X11/extensions/shape.h
-UVES_replay_control.o: /opt/local/include/X11/extensions/shapeconst.h
-UVES_replay_control.o: charstr.h utils.h input.h stats.h memory.h error.h
-UVES_replay_control.o: const.h
-UVES_rescale_region.o: UVES_popler.h pg_plot.h
-UVES_rescale_region.o: /Users/rcooke/Software/pgplot52/pgplot/cpgplot.h
-UVES_rescale_region.o: /opt/local/include/X11/Xlib.h
-UVES_rescale_region.o: /opt/local/include/X11/X.h
-UVES_rescale_region.o: /opt/local/include/X11/Xfuncproto.h
-UVES_rescale_region.o: /opt/local/include/X11/Xosdefs.h
-UVES_rescale_region.o: /opt/local/include/X11/Xutil.h
-UVES_rescale_region.o: /opt/local/include/X11/keysym.h
-UVES_rescale_region.o: /opt/local/include/X11/keysymdef.h
-UVES_rescale_region.o: /opt/local/include/X11/Xatom.h
-UVES_rescale_region.o: /opt/local/include/X11/Xos.h
-UVES_rescale_region.o: /opt/local/include/X11/Xarch.h
-UVES_rescale_region.o: /opt/local/include/X11/extensions/shape.h
-UVES_rescale_region.o: /opt/local/include/X11/extensions/shapeconst.h
-UVES_rescale_region.o: charstr.h utils.h stats.h fit.h memory.h error.h
-UVES_revwpol.o: UVES_popler.h pg_plot.h /Users/rcooke/Software/pgplot52/pgplot/cpgplot.h
-UVES_revwpol.o: /opt/local/include/X11/Xlib.h /opt/local/include/X11/X.h
-UVES_revwpol.o: /opt/local/include/X11/Xfuncproto.h
-UVES_revwpol.o: /opt/local/include/X11/Xosdefs.h
-UVES_revwpol.o: /opt/local/include/X11/Xutil.h
-UVES_revwpol.o: /opt/local/include/X11/keysym.h
-UVES_revwpol.o: /opt/local/include/X11/keysymdef.h
-UVES_revwpol.o: /opt/local/include/X11/Xatom.h /opt/local/include/X11/Xos.h
-UVES_revwpol.o: /opt/local/include/X11/Xarch.h
-UVES_revwpol.o: /opt/local/include/X11/extensions/shape.h
-UVES_revwpol.o: /opt/local/include/X11/extensions/shapeconst.h charstr.h
-UVES_revwpol.o: utils.h fit.h memory.h error.h
-UVES_rinputfile.o: UVES_popler.h pg_plot.h
-UVES_rinputfile.o: /Users/rcooke/Software/pgplot52/pgplot/cpgplot.h
-UVES_rinputfile.o: /opt/local/include/X11/Xlib.h /opt/local/include/X11/X.h
-UVES_rinputfile.o: /opt/local/include/X11/Xfuncproto.h
-UVES_rinputfile.o: /opt/local/include/X11/Xosdefs.h
-UVES_rinputfile.o: /opt/local/include/X11/Xutil.h
-UVES_rinputfile.o: /opt/local/include/X11/keysym.h
-UVES_rinputfile.o: /opt/local/include/X11/keysymdef.h
-UVES_rinputfile.o: /opt/local/include/X11/Xatom.h
-UVES_rinputfile.o: /opt/local/include/X11/Xos.h
-UVES_rinputfile.o: /opt/local/include/X11/Xarch.h
-UVES_rinputfile.o: /opt/local/include/X11/extensions/shape.h
-UVES_rinputfile.o: /opt/local/include/X11/extensions/shapeconst.h charstr.h
-UVES_rinputfile.o: utils.h file.h error.h
-UVES_rFITSlist.o: UVES_popler.h pg_plot.h
-UVES_rFITSlist.o: /Users/rcooke/Software/pgplot52/pgplot/cpgplot.h
-UVES_rFITSlist.o: /opt/local/include/X11/Xlib.h /opt/local/include/X11/X.h
-UVES_rFITSlist.o: /opt/local/include/X11/Xfuncproto.h
-UVES_rFITSlist.o: /opt/local/include/X11/Xosdefs.h
-UVES_rFITSlist.o: /opt/local/include/X11/Xutil.h
-UVES_rFITSlist.o: /opt/local/include/X11/keysym.h
-UVES_rFITSlist.o: /opt/local/include/X11/keysymdef.h
-UVES_rFITSlist.o: /opt/local/include/X11/Xatom.h /opt/local/include/X11/Xos.h
-UVES_rFITSlist.o: /opt/local/include/X11/Xarch.h
-UVES_rFITSlist.o: /opt/local/include/X11/extensions/shape.h
-UVES_rFITSlist.o: /opt/local/include/X11/extensions/shapeconst.h charstr.h
-UVES_rFITSlist.o: utils.h file.h error.h
-UVES_rMacmap.o: UVES_popler.h pg_plot.h /Users/rcooke/Software/pgplot52/pgplot/cpgplot.h
-UVES_rMacmap.o: /opt/local/include/X11/Xlib.h /opt/local/include/X11/X.h
-UVES_rMacmap.o: /opt/local/include/X11/Xfuncproto.h
-UVES_rMacmap.o: /opt/local/include/X11/Xosdefs.h
-UVES_rMacmap.o: /opt/local/include/X11/Xutil.h
-UVES_rMacmap.o: /opt/local/include/X11/keysym.h
-UVES_rMacmap.o: /opt/local/include/X11/keysymdef.h
-UVES_rMacmap.o: /opt/local/include/X11/Xatom.h /opt/local/include/X11/Xos.h
-UVES_rMacmap.o: /opt/local/include/X11/Xarch.h
-UVES_rMacmap.o: /opt/local/include/X11/extensions/shape.h
-UVES_rMacmap.o: /opt/local/include/X11/extensions/shapeconst.h charstr.h
-UVES_rMacmap.o: utils.h memory.h file.h error.h
-UVES_rscale.o: UVES_popler.h pg_plot.h /Users/rcooke/Software/pgplot52/pgplot/cpgplot.h
-UVES_rscale.o: /opt/local/include/X11/Xlib.h /opt/local/include/X11/X.h
-UVES_rscale.o: /opt/local/include/X11/Xfuncproto.h
-UVES_rscale.o: /opt/local/include/X11/Xosdefs.h
-UVES_rscale.o: /opt/local/include/X11/Xutil.h /opt/local/include/X11/keysym.h
-UVES_rscale.o: /opt/local/include/X11/keysymdef.h
-UVES_rscale.o: /opt/local/include/X11/Xatom.h /opt/local/include/X11/Xos.h
-UVES_rscale.o: /opt/local/include/X11/Xarch.h
-UVES_rscale.o: /opt/local/include/X11/extensions/shape.h
-UVES_rscale.o: /opt/local/include/X11/extensions/shapeconst.h charstr.h
-UVES_rscale.o: utils.h file.h error.h
-UVES_rUPLfile.o: UVES_popler.h pg_plot.h
-UVES_rUPLfile.o: /Users/rcooke/Software/pgplot52/pgplot/cpgplot.h
-UVES_rUPLfile.o: /opt/local/include/X11/Xlib.h /opt/local/include/X11/X.h
-UVES_rUPLfile.o: /opt/local/include/X11/Xfuncproto.h
-UVES_rUPLfile.o: /opt/local/include/X11/Xosdefs.h
-UVES_rUPLfile.o: /opt/local/include/X11/Xutil.h
-UVES_rUPLfile.o: /opt/local/include/X11/keysym.h
-UVES_rUPLfile.o: /opt/local/include/X11/keysymdef.h
-UVES_rUPLfile.o: /opt/local/include/X11/Xatom.h /opt/local/include/X11/Xos.h
-UVES_rUPLfile.o: /opt/local/include/X11/Xarch.h
-UVES_rUPLfile.o: /opt/local/include/X11/extensions/shape.h
-UVES_rUPLfile.o: /opt/local/include/X11/extensions/shapeconst.h charstr.h
-UVES_rUPLfile.o: utils.h file.h error.h
-UVES_rvshift.o: UVES_popler.h pg_plot.h /Users/rcooke/Software/pgplot52/pgplot/cpgplot.h
-UVES_rvshift.o: /opt/local/include/X11/Xlib.h /opt/local/include/X11/X.h
-UVES_rvshift.o: /opt/local/include/X11/Xfuncproto.h
-UVES_rvshift.o: /opt/local/include/X11/Xosdefs.h
-UVES_rvshift.o: /opt/local/include/X11/Xutil.h
-UVES_rvshift.o: /opt/local/include/X11/keysym.h
-UVES_rvshift.o: /opt/local/include/X11/keysymdef.h
-UVES_rvshift.o: /opt/local/include/X11/Xatom.h /opt/local/include/X11/Xos.h
-UVES_rvshift.o: /opt/local/include/X11/Xarch.h
-UVES_rvshift.o: /opt/local/include/X11/extensions/shape.h
-UVES_rvshift.o: /opt/local/include/X11/extensions/shapeconst.h charstr.h
-UVES_rvshift.o: utils.h file.h error.h
-UVES_scale.o: UVES_popler.h pg_plot.h /Users/rcooke/Software/pgplot52/pgplot/cpgplot.h
-UVES_scale.o: /opt/local/include/X11/Xlib.h /opt/local/include/X11/X.h
-UVES_scale.o: /opt/local/include/X11/Xfuncproto.h
-UVES_scale.o: /opt/local/include/X11/Xosdefs.h /opt/local/include/X11/Xutil.h
-UVES_scale.o: /opt/local/include/X11/keysym.h
-UVES_scale.o: /opt/local/include/X11/keysymdef.h
-UVES_scale.o: /opt/local/include/X11/Xatom.h /opt/local/include/X11/Xos.h
-UVES_scale.o: /opt/local/include/X11/Xarch.h
-UVES_scale.o: /opt/local/include/X11/extensions/shape.h
-UVES_scale.o: /opt/local/include/X11/extensions/shapeconst.h charstr.h
-UVES_scale.o: utils.h error.h
-UVES_select_subspec.o: UVES_popler.h pg_plot.h
-UVES_select_subspec.o: /Users/rcooke/Software/pgplot52/pgplot/cpgplot.h
-UVES_select_subspec.o: /opt/local/include/X11/Xlib.h
-UVES_select_subspec.o: /opt/local/include/X11/X.h
-UVES_select_subspec.o: /opt/local/include/X11/Xfuncproto.h
-UVES_select_subspec.o: /opt/local/include/X11/Xosdefs.h
-UVES_select_subspec.o: /opt/local/include/X11/Xutil.h
-UVES_select_subspec.o: /opt/local/include/X11/keysym.h
-UVES_select_subspec.o: /opt/local/include/X11/keysymdef.h
-UVES_select_subspec.o: /opt/local/include/X11/Xatom.h
-UVES_select_subspec.o: /opt/local/include/X11/Xos.h
-UVES_select_subspec.o: /opt/local/include/X11/Xarch.h
-UVES_select_subspec.o: /opt/local/include/X11/extensions/shape.h
-UVES_select_subspec.o: /opt/local/include/X11/extensions/shapeconst.h
-UVES_select_subspec.o: charstr.h utils.h memory.h error.h
-UVES_set_wavelen_scale.o: UVES_popler.h pg_plot.h
-UVES_set_wavelen_scale.o: /Users/rcooke/Software/pgplot52/pgplot/cpgplot.h
-UVES_set_wavelen_scale.o: /opt/local/include/X11/Xlib.h
-UVES_set_wavelen_scale.o: /opt/local/include/X11/X.h
-UVES_set_wavelen_scale.o: /opt/local/include/X11/Xfuncproto.h
-UVES_set_wavelen_scale.o: /opt/local/include/X11/Xosdefs.h
-UVES_set_wavelen_scale.o: /opt/local/include/X11/Xutil.h
-UVES_set_wavelen_scale.o: /opt/local/include/X11/keysym.h
-UVES_set_wavelen_scale.o: /opt/local/include/X11/keysymdef.h
-UVES_set_wavelen_scale.o: /opt/local/include/X11/Xatom.h
-UVES_set_wavelen_scale.o: /opt/local/include/X11/Xos.h
-UVES_set_wavelen_scale.o: /opt/local/include/X11/Xarch.h
-UVES_set_wavelen_scale.o: /opt/local/include/X11/extensions/shape.h
-UVES_set_wavelen_scale.o: /opt/local/include/X11/extensions/shapeconst.h
-UVES_set_wavelen_scale.o: charstr.h utils.h const.h memory.h error.h
-UVES_skysub.o: UVES_popler.h pg_plot.h /Users/rcooke/Software/pgplot52/pgplot/cpgplot.h
-UVES_skysub.o: /opt/local/include/X11/Xlib.h /opt/local/include/X11/X.h
-UVES_skysub.o: /opt/local/include/X11/Xfuncproto.h
-UVES_skysub.o: /opt/local/include/X11/Xosdefs.h
-UVES_skysub.o: /opt/local/include/X11/Xutil.h /opt/local/include/X11/keysym.h
-UVES_skysub.o: /opt/local/include/X11/keysymdef.h
-UVES_skysub.o: /opt/local/include/X11/Xatom.h /opt/local/include/X11/Xos.h
-UVES_skysub.o: /opt/local/include/X11/Xarch.h
-UVES_skysub.o: /opt/local/include/X11/extensions/shape.h
-UVES_skysub.o: /opt/local/include/X11/extensions/shapeconst.h charstr.h
-UVES_skysub.o: utils.h memory.h error.h
-UVES_synthThAr.o: UVES_popler.h pg_plot.h
-UVES_synthThAr.o: /Users/rcooke/Software/pgplot52/pgplot/cpgplot.h
-UVES_synthThAr.o: /opt/local/include/X11/Xlib.h /opt/local/include/X11/X.h
-UVES_synthThAr.o: /opt/local/include/X11/Xfuncproto.h
-UVES_synthThAr.o: /opt/local/include/X11/Xosdefs.h
-UVES_synthThAr.o: /opt/local/include/X11/Xutil.h
-UVES_synthThAr.o: /opt/local/include/X11/keysym.h
-UVES_synthThAr.o: /opt/local/include/X11/keysymdef.h
-UVES_synthThAr.o: /opt/local/include/X11/Xatom.h /opt/local/include/X11/Xos.h
-UVES_synthThAr.o: /opt/local/include/X11/Xarch.h
-UVES_synthThAr.o: /opt/local/include/X11/extensions/shape.h
-UVES_synthThAr.o: /opt/local/include/X11/extensions/shapeconst.h charstr.h
-UVES_synthThAr.o: utils.h gamm.h const.h error.h
-UVES_thar_sigarray.o: UVES_popler.h pg_plot.h
-UVES_thar_sigarray.o: /Users/rcooke/Software/pgplot52/pgplot/cpgplot.h
-UVES_thar_sigarray.o: /opt/local/include/X11/Xlib.h
-UVES_thar_sigarray.o: /opt/local/include/X11/X.h
-UVES_thar_sigarray.o: /opt/local/include/X11/Xfuncproto.h
-UVES_thar_sigarray.o: /opt/local/include/X11/Xosdefs.h
-UVES_thar_sigarray.o: /opt/local/include/X11/Xutil.h
-UVES_thar_sigarray.o: /opt/local/include/X11/keysym.h
-UVES_thar_sigarray.o: /opt/local/include/X11/keysymdef.h
-UVES_thar_sigarray.o: /opt/local/include/X11/Xatom.h
-UVES_thar_sigarray.o: /opt/local/include/X11/Xos.h
-UVES_thar_sigarray.o: /opt/local/include/X11/Xarch.h
-UVES_thar_sigarray.o: /opt/local/include/X11/extensions/shape.h
-UVES_thar_sigarray.o: /opt/local/include/X11/extensions/shapeconst.h
-UVES_thar_sigarray.o: charstr.h utils.h memory.h error.h
-UVES_undo_lastact.o: UVES_popler.h pg_plot.h
-UVES_undo_lastact.o: /Users/rcooke/Software/pgplot52/pgplot/cpgplot.h
-UVES_undo_lastact.o: /opt/local/include/X11/Xlib.h /opt/local/include/X11/X.h
-UVES_undo_lastact.o: /opt/local/include/X11/Xfuncproto.h
-UVES_undo_lastact.o: /opt/local/include/X11/Xosdefs.h
-UVES_undo_lastact.o: /opt/local/include/X11/Xutil.h
-UVES_undo_lastact.o: /opt/local/include/X11/keysym.h
-UVES_undo_lastact.o: /opt/local/include/X11/keysymdef.h
-UVES_undo_lastact.o: /opt/local/include/X11/Xatom.h
-UVES_undo_lastact.o: /opt/local/include/X11/Xos.h
-UVES_undo_lastact.o: /opt/local/include/X11/Xarch.h
-UVES_undo_lastact.o: /opt/local/include/X11/extensions/shape.h
-UVES_undo_lastact.o: /opt/local/include/X11/extensions/shapeconst.h charstr.h
-UVES_undo_lastact.o: utils.h error.h
-UVES_vhelio.o: UVES_popler.h pg_plot.h /Users/rcooke/Software/pgplot52/pgplot/cpgplot.h
-UVES_vhelio.o: /opt/local/include/X11/Xlib.h /opt/local/include/X11/X.h
-UVES_vhelio.o: /opt/local/include/X11/Xfuncproto.h
-UVES_vhelio.o: /opt/local/include/X11/Xosdefs.h
-UVES_vhelio.o: /opt/local/include/X11/Xutil.h /opt/local/include/X11/keysym.h
-UVES_vhelio.o: /opt/local/include/X11/keysymdef.h
-UVES_vhelio.o: /opt/local/include/X11/Xatom.h /opt/local/include/X11/Xos.h
-UVES_vhelio.o: /opt/local/include/X11/Xarch.h
-UVES_vhelio.o: /opt/local/include/X11/extensions/shape.h
-UVES_vhelio.o: /opt/local/include/X11/extensions/shapeconst.h charstr.h
-UVES_vhelio.o: utils.h astron.h const.h error.h
-UVES_wDATfile.o: UVES_popler.h pg_plot.h
-UVES_wDATfile.o: /Users/rcooke/Software/pgplot52/pgplot/cpgplot.h
-UVES_wDATfile.o: /opt/local/include/X11/Xlib.h /opt/local/include/X11/X.h
-UVES_wDATfile.o: /opt/local/include/X11/Xfuncproto.h
-UVES_wDATfile.o: /opt/local/include/X11/Xosdefs.h
-UVES_wDATfile.o: /opt/local/include/X11/Xutil.h
-UVES_wDATfile.o: /opt/local/include/X11/keysym.h
-UVES_wDATfile.o: /opt/local/include/X11/keysymdef.h
-UVES_wDATfile.o: /opt/local/include/X11/Xatom.h /opt/local/include/X11/Xos.h
-UVES_wDATfile.o: /opt/local/include/X11/Xarch.h
-UVES_wDATfile.o: /opt/local/include/X11/extensions/shape.h
-UVES_wDATfile.o: /opt/local/include/X11/extensions/shapeconst.h charstr.h
-UVES_wDATfile.o: utils.h file.h error.h
-UVES_wFITSfile.o: /opt/local/include/fitsio.h /opt/local/include/longnam.h
-UVES_wFITSfile.o: UVES_popler.h pg_plot.h
-UVES_wFITSfile.o: /Users/rcooke/Software/pgplot52/pgplot/cpgplot.h
-UVES_wFITSfile.o: /opt/local/include/X11/Xlib.h /opt/local/include/X11/X.h
-UVES_wFITSfile.o: /opt/local/include/X11/Xfuncproto.h
-UVES_wFITSfile.o: /opt/local/include/X11/Xosdefs.h
-UVES_wFITSfile.o: /opt/local/include/X11/Xutil.h
-UVES_wFITSfile.o: /opt/local/include/X11/keysym.h
-UVES_wFITSfile.o: /opt/local/include/X11/keysymdef.h
-UVES_wFITSfile.o: /opt/local/include/X11/Xatom.h /opt/local/include/X11/Xos.h
-UVES_wFITSfile.o: /opt/local/include/X11/Xarch.h
-UVES_wFITSfile.o: /opt/local/include/X11/extensions/shape.h
-UVES_wFITSfile.o: /opt/local/include/X11/extensions/shapeconst.h charstr.h
-UVES_wFITSfile.o: utils.h memory.h error.h
-UVES_wrawFITS.o: /opt/local/include/fitsio.h /opt/local/include/longnam.h
-UVES_wrawFITS.o: UVES_popler.h pg_plot.h
-UVES_wrawFITS.o: /Users/rcooke/Software/pgplot52/pgplot/cpgplot.h
-UVES_wrawFITS.o: /opt/local/include/X11/Xlib.h /opt/local/include/X11/X.h
-UVES_wrawFITS.o: /opt/local/include/X11/Xfuncproto.h
-UVES_wrawFITS.o: /opt/local/include/X11/Xosdefs.h
-UVES_wrawFITS.o: /opt/local/include/X11/Xutil.h
-UVES_wrawFITS.o: /opt/local/include/X11/keysym.h
-UVES_wrawFITS.o: /opt/local/include/X11/keysymdef.h
-UVES_wrawFITS.o: /opt/local/include/X11/Xatom.h /opt/local/include/X11/Xos.h
-UVES_wrawFITS.o: /opt/local/include/X11/Xarch.h
-UVES_wrawFITS.o: /opt/local/include/X11/extensions/shape.h
-UVES_wrawFITS.o: /opt/local/include/X11/extensions/shapeconst.h charstr.h
-UVES_wrawFITS.o: utils.h memory.h error.h
-UVES_wUPLfile.o: UVES_popler.h pg_plot.h
-UVES_wUPLfile.o: /Users/rcooke/Software/pgplot52/pgplot/cpgplot.h
-UVES_wUPLfile.o: /opt/local/include/X11/Xlib.h /opt/local/include/X11/X.h
-UVES_wUPLfile.o: /opt/local/include/X11/Xfuncproto.h
-UVES_wUPLfile.o: /opt/local/include/X11/Xosdefs.h
-UVES_wUPLfile.o: /opt/local/include/X11/Xutil.h
-UVES_wUPLfile.o: /opt/local/include/X11/keysym.h
-UVES_wUPLfile.o: /opt/local/include/X11/keysymdef.h
-UVES_wUPLfile.o: /opt/local/include/X11/Xatom.h /opt/local/include/X11/Xos.h
-UVES_wUPLfile.o: /opt/local/include/X11/Xarch.h
-UVES_wUPLfile.o: /opt/local/include/X11/extensions/shape.h
-UVES_wUPLfile.o: /opt/local/include/X11/extensions/shapeconst.h charstr.h
-UVES_wUPLfile.o: utils.h file.h error.h
-UVES_wpol.o: UVES_popler.h pg_plot.h /Users/rcooke/Software/pgplot52/pgplot/cpgplot.h
-UVES_wpol.o: /opt/local/include/X11/Xlib.h /opt/local/include/X11/X.h
-UVES_wpol.o: /opt/local/include/X11/Xfuncproto.h
-UVES_wpol.o: /opt/local/include/X11/Xosdefs.h /opt/local/include/X11/Xutil.h
-UVES_wpol.o: /opt/local/include/X11/keysym.h
-UVES_wpol.o: /opt/local/include/X11/keysymdef.h
-UVES_wpol.o: /opt/local/include/X11/Xatom.h /opt/local/include/X11/Xos.h
-UVES_wpol.o: /opt/local/include/X11/Xarch.h
-UVES_wpol.o: /opt/local/include/X11/extensions/shape.h
-UVES_wpol.o: /opt/local/include/X11/extensions/shapeconst.h charstr.h utils.h
-UVES_wpol.o: fit.h stats.h memory.h const.h error.h
-UVES_tmpfit.o: UVES_popler.h pg_plot.h /Users/rcooke/Software/pgplot52/pgplot/cpgplot.h
-UVES_tmpfit.o: /opt/local/include/X11/Xlib.h /opt/local/include/X11/X.h
-UVES_tmpfit.o: /opt/local/include/X11/Xfuncproto.h
-UVES_tmpfit.o: /opt/local/include/X11/Xosdefs.h
-UVES_tmpfit.o: /opt/local/include/X11/Xutil.h /opt/local/include/X11/keysym.h
-UVES_tmpfit.o: /opt/local/include/X11/keysymdef.h
-UVES_tmpfit.o: /opt/local/include/X11/Xatom.h /opt/local/include/X11/Xos.h
-UVES_tmpfit.o: /opt/local/include/X11/Xarch.h
-UVES_tmpfit.o: /opt/local/include/X11/extensions/shape.h
-UVES_tmpfit.o: /opt/local/include/X11/extensions/shapeconst.h charstr.h
-UVES_tmpfit.o: utils.h fit.h memory.h const.h error.h
+UVES_hirx_blzfit.o: UVES_popler.h pg_plot.h charstr.h utils.h fit.h stats.h
+UVES_hirx_blzfit.o: memory.h error.h
+UVES_init_cspec.o: UVES_popler.h pg_plot.h charstr.h utils.h const.h memory.h
+UVES_init_cspec.o: error.h
+UVES_memspec.o: UVES_popler.h pg_plot.h charstr.h utils.h memory.h error.h
+UVES_merge_thar.o: UVES_popler.h pg_plot.h charstr.h utils.h const.h memory.h
+UVES_merge_thar.o: error.h
+UVES_model_resol.o: UVES_popler.h pg_plot.h charstr.h utils.h fit.h stats.h
+UVES_model_resol.o: memory.h const.h error.h
+UVES_order_cont.o: UVES_popler.h pg_plot.h charstr.h utils.h error.h
+UVES_order_rejsigedge.o: UVES_popler.h pg_plot.h charstr.h utils.h memory.h
+UVES_order_rejsigedge.o: stats.h error.h
+UVES_order_sigclip.o: UVES_popler.h pg_plot.h charstr.h utils.h stats.h
+UVES_order_sigclip.o: memory.h error.h
+UVES_order_stats.o: UVES_popler.h pg_plot.h charstr.h utils.h stats.h
+UVES_order_stats.o: memory.h error.h
+UVES_params_init.o: UVES_popler.h pg_plot.h charstr.h utils.h
+UVES_params_set.o: UVES_popler.h pg_plot.h charstr.h utils.h
+UVES_past_actions.o: UVES_popler.h pg_plot.h charstr.h utils.h fit.h memory.h
+UVES_past_actions.o: error.h
+UVES_pgenv_init.o: UVES_popler.h pg_plot.h charstr.h utils.h
+UVES_pixscal.o: UVES_popler.h pg_plot.h charstr.h utils.h const.h
+UVES_plot_cspec.o: UVES_popler.h pg_plot.h charstr.h utils.h fit.h stats.h
+UVES_plot_cspec.o: sort.h gamm.h input.h memory.h const.h error.h
+UVES_replace_envinstr.o: UVES_popler.h pg_plot.h charstr.h utils.h memory.h
+UVES_replace_envinstr.o: error.h
+UVES_plot_replay.o: UVES_popler.h pg_plot.h charstr.h utils.h input.h error.h
+UVES_popler.o: UVES_popler.h pg_plot.h charstr.h utils.h stats.h input.h
+UVES_popler.o: error.h
+UVES_r1Dspec.o: UVES_popler.h pg_plot.h charstr.h utils.h const.h file.h
+UVES_r1Dspec.o: memory.h error.h
+UVES_r2Dspec.o: UVES_popler.h pg_plot.h charstr.h utils.h stats.h memory.h
+UVES_r2Dspec.o: error.h const.h
+UVES_r2Dspec_ESOmer.o: UVES_popler.h pg_plot.h charstr.h utils.h astron.h
+UVES_r2Dspec_ESOmer.o: const.h memory.h error.h
+UVES_r2Dspec_espresso.o: UVES_popler.h pg_plot.h charstr.h utils.h stats.h
+UVES_r2Dspec_espresso.o: memory.h error.h const.h
+UVES_r2Dspec_harps.o: UVES_popler.h pg_plot.h charstr.h utils.h stats.h
+UVES_r2Dspec_harps.o: memory.h error.h const.h
+UVES_r2Dspec_hirx.o: UVES_popler.h pg_plot.h charstr.h utils.h fit.h memory.h
+UVES_r2Dspec_hirx.o: error.h const.h
+UVES_r2Dspec_iraf.o: UVES_popler.h pg_plot.h charstr.h utils.h astron.h
+UVES_r2Dspec_iraf.o: const.h memory.h error.h
+UVES_r2Dspec_iresi.o: UVES_popler.h pg_plot.h charstr.h utils.h astron.h
+UVES_r2Dspec_iresi.o: const.h memory.h error.h
+UVES_r2Dspec_irls.o: UVES_popler.h pg_plot.h charstr.h utils.h astron.h
+UVES_r2Dspec_irls.o: const.h memory.h error.h
+UVES_r2Dspec_KODIAQ.o: UVES_popler.h pg_plot.h charstr.h utils.h memory.h
+UVES_r2Dspec_KODIAQ.o: error.h
+UVES_r2Dspec_mage.o: UVES_popler.h pg_plot.h charstr.h utils.h astron.h
+UVES_r2Dspec_mage.o: const.h memory.h error.h
+UVES_r2Dspec_makee.o: UVES_popler.h pg_plot.h charstr.h utils.h memory.h
+UVES_r2Dspec_makee.o: const.h error.h
+UVES_ratmask.o: UVES_popler.h pg_plot.h charstr.h utils.h memory.h file.h
+UVES_ratmask.o: error.h
+UVES_redispers.o: UVES_popler.h pg_plot.h charstr.h utils.h memory.h error.h
+UVES_replay_control.o: UVES_popler.h pg_plot.h charstr.h utils.h input.h
+UVES_replay_control.o: stats.h memory.h error.h const.h
+UVES_rescale_region.o: UVES_popler.h pg_plot.h charstr.h utils.h stats.h
+UVES_rescale_region.o: fit.h memory.h error.h
+UVES_revwpol.o: UVES_popler.h pg_plot.h charstr.h utils.h fit.h memory.h
+UVES_revwpol.o: error.h
+UVES_rinputfile.o: UVES_popler.h pg_plot.h charstr.h utils.h file.h error.h
+UVES_rFITSlist.o: UVES_popler.h pg_plot.h charstr.h utils.h file.h error.h
+UVES_rMacmap.o: UVES_popler.h pg_plot.h charstr.h utils.h memory.h file.h
+UVES_rMacmap.o: error.h
+UVES_rscale.o: UVES_popler.h pg_plot.h charstr.h utils.h file.h error.h
+UVES_rUPLfile.o: UVES_popler.h pg_plot.h charstr.h utils.h file.h error.h
+UVES_rvshift.o: UVES_popler.h pg_plot.h charstr.h utils.h file.h error.h
+UVES_scale.o: UVES_popler.h pg_plot.h charstr.h utils.h error.h
+UVES_select_subspec.o: UVES_popler.h pg_plot.h charstr.h utils.h memory.h
+UVES_select_subspec.o: error.h
+UVES_set_wavelen_scale.o: UVES_popler.h pg_plot.h charstr.h utils.h const.h
+UVES_set_wavelen_scale.o: memory.h error.h
+UVES_skysub.o: UVES_popler.h pg_plot.h charstr.h utils.h memory.h error.h
+UVES_synthThAr.o: UVES_popler.h pg_plot.h charstr.h utils.h gamm.h const.h
+UVES_synthThAr.o: error.h
+UVES_thar_sigarray.o: UVES_popler.h pg_plot.h charstr.h utils.h memory.h
+UVES_thar_sigarray.o: error.h
+UVES_undo_lastact.o: UVES_popler.h pg_plot.h charstr.h utils.h error.h
+UVES_vhelio.o: UVES_popler.h pg_plot.h charstr.h utils.h astron.h const.h
+UVES_vhelio.o: error.h
+UVES_wDATfile.o: UVES_popler.h pg_plot.h charstr.h utils.h file.h error.h
+UVES_wFITSfile.o: UVES_popler.h pg_plot.h charstr.h utils.h memory.h error.h
+UVES_wrawFITS.o: UVES_popler.h pg_plot.h charstr.h utils.h memory.h error.h
+UVES_wUPLfile.o: UVES_popler.h pg_plot.h charstr.h utils.h file.h error.h
+UVES_wpol.o: UVES_popler.h pg_plot.h charstr.h utils.h fit.h stats.h memory.h
+UVES_wpol.o: const.h error.h
+UVES_tmpfit.o: UVES_popler.h pg_plot.h charstr.h utils.h fit.h memory.h
+UVES_tmpfit.o: const.h error.h
 zbrent.o: fit.h error.h
